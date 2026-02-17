@@ -24,19 +24,19 @@ export default function App() {
         const totalsRow = dataRows[1]; 
 
         if (totalsRow) {
-          // Function to remove £, %, and spaces so the code can do math
           const clean = (val) => {
             if (!val) return 0;
+            // Remove symbols and handle decimals
             const sanitized = val.toString().replace(/[£%, ]/g, '');
             return parseFloat(sanitized) || 0;
           };
 
           setData({
-            sales: clean(totalsRow[9]),   // Column J
-            cost: clean(totalsRow[10]),  // Column K
-            gp: clean(totalsRow[11]),    // Column L
-            labour: clean(totalsRow[12]), // Column M
-            profit: clean(totalsRow[13])  // Column N
+            sales: clean(totalsRow[9]),   
+            cost: clean(totalsRow[10]),  
+            gp: clean(totalsRow[11]),    
+            labour: clean(totalsRow[12]), 
+            profit: clean(totalsRow[13])  
           });
         }
       } catch (error) {
@@ -45,12 +45,10 @@ export default function App() {
     };
 
     fetchData();
-    // Refresh every 60 seconds to catch Google Sheet updates
     const interval = setInterval(fetchData, 60000);
     return () => clearInterval(interval);
   }, []);
 
-  // Format numbers for a professional display
   const stats = [
     { 
       name: 'Total Net Sales', 
@@ -85,11 +83,11 @@ export default function App() {
           <h1 className="text-3xl font-bold text-[#00ff41] tracking-tighter flex items-center uppercase italic">
             <Zap className="mr-2" size={24} fill="#00ff41" /> Matrix_v1.2
           </h1>
-          <p className="text-zinc-500 text-[10px] mt-1 tracking-[0.3em]">DATA_SOURCE: DASHBOARD_J_N</p>
+          <p className="text-zinc-500 text-[10px] mt-1 tracking-[0.3em]">TABAC // SATURDAY_DISCO</p>
         </div>
         <div className="flex items-center gap-2">
            <div className="h-2 w-2 rounded-full bg-[#00ff41] animate-pulse"></div>
-           <span className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest">Live_Feed_Active</span>
+           <span className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest text-right">Live_Feed_Active</span>
         </div>
       </header>
 
@@ -105,7 +103,7 @@ export default function App() {
 
       <div className="mt-12 bg-[#00ff41]/5 border border-[#00ff41]/20 p-16 rounded-[3rem] flex flex-col items-center justify-center text-center shadow-[0_0_50px_-12px_rgba(0,255,65,0.2)]">
         <h2 className="text-[#00ff41] text-xs font-bold uppercase tracking-[0.5em] mb-4">Net Operating Profit</h2>
-        <p className="text-7xl md:text-9xl font-black text-[#00ff41] tracking-tighter">
+        <p className="text-7xl md:text-9xl font-black text-[#00ff41] tracking-tighter drop-shadow-2xl">
           £{data.profit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}
         </p>
       </div>
