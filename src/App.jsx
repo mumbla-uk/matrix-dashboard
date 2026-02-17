@@ -24,14 +24,17 @@ export default function App() {
         const totalsRow = dataRows[1]; 
 
         if (totalsRow) {
-          setData({
-            sales: Number(totalsRow[9]) || 0,   // Column J
-            cost: Number(totalsRow[10]) || 0,  // Column K
-            gp: Number(totalsRow[11]) || 0,    // Column L
-            labour: Number(totalsRow[12]) || 0, // Column M
-            profit: Number(totalsRow[13]) || 0  // Column N
-          });
-        }
+  // Helper to clean symbols like £, %, or spaces
+  const clean = (val) => val ? val.toString().replace(/[£%, ]/g, '') : "0";
+
+  setData({
+    sales: clean(totalsRow[9]),   // Column J
+    cost: clean(totalsRow[10]),  // Column K
+    gp: clean(totalsRow[11]),    // Column L
+    labour: clean(totalsRow[12]), // Column M
+    profit: clean(totalsRow[13])  // Column N
+  });
+}
       } catch (error) {
         console.error("Matrix Connection Error:", error);
       }
@@ -41,12 +44,28 @@ export default function App() {
   }, []);
 
   // Format numbers for the UI
-  const stats = [
-    { name: 'Total Net Sales', value: `£${data.sales.toFixed(2)}`, icon: DollarSign, color: '#60a5fa' },
-    { name: 'Total Liquid Cost', value: `£${data.cost.toFixed(2)}`, icon: TrendingUp, color: '#fb923c' },
-    { name: 'Nightly GP%', value: `${(data.gp * 100).toFixed(1)}%`, icon: Percent, color: '#00ff41' },
-    { name: 'Total Labour Cost', value: `£${data.labour.toFixed(2)}`, icon: Users, color: '#c084fc' },
-  ];
+const stats = [
+  { 
+    name: 'Total Net Sales', 
+    value: `£${Number(data.sales).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`, 
+    icon: DollarSign, color: '#60a5fa' 
+  },
+  { 
+    name: 'Total Liquid Cost', 
+    value: `£${Number(data.cost).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`, 
+    icon: TrendingUp, color: '#fb923c' 
+  },
+  { 
+    name: 'Nightly GP%', 
+    value: `${(Number(data.gp) * 100).toFixed(1)}%`, 
+    icon: Percent, color: '#00ff41' 
+  },
+  { 
+    name: 'Total Labour Cost', 
+    value: `£${Number(data.labour).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`, 
+    icon: Users, color: '#c084fc' 
+  },
+];
 
   return (
     <div className="min-h-screen bg-black p-6 md:p-12 text-white font-mono">
