@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { DollarSign, Percent, Users, TrendingUp, Zap } from 'lucide-react';
 
 export default function App() {
-  // Hardcoded Saturday Disco Data from Business(7)
   const stats = [
     { name: 'Total Net Sales', value: '£1,046.25', icon: DollarSign, color: 'text-blue-400' },
     { name: 'Total Liquid Cost', value: '£178.40', icon: TrendingUp, color: 'text-orange-400' },
@@ -19,14 +18,11 @@ export default function App() {
           </h1>
           <p className="text-zinc-500 text-[10px] mt-1 tracking-[0.3em]">TABAC // SATURDAY_DISCO</p>
         </div>
-        <div className="text-right">
-          <span className="bg-[#00ff41]/10 text-[#00ff41] border border-[#00ff41]/30 px-3 py-1 rounded-full text-[10px] font-bold">LIVE_FEED_ACTIVE</span>
-        </div>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((item) => (
-          <div key={item.name} className="bg-zinc-900/40 border border-zinc-800 p-8 rounded-3xl backdrop-blur-sm">
+          <div key={item.name} className="bg-zinc-900/40 border border-zinc-800 p-8 rounded-3xl">
             <item.icon className={`${item.color} mb-6`} size={28} />
             <p className="text-zinc-500 text-[10px] mb-2 uppercase font-bold tracking-widest">{item.name}</p>
             <p className={`text-3xl font-black tracking-tighter ${item.color}`}>{item.value}</p>
@@ -34,6 +30,10 @@ export default function App() {
         ))}
       </div>
 
-      <div className="mt-12 bg-[#00ff41]/5 border border-[#00ff41]/20 p-16 rounded-[3rem] flex flex-col items-center justify-center shadow-[0_0_50px_-12px_rgba(0,255,65,0.15)]">
+      <div className="mt-12 bg-[#00ff41]/5 border border-[#00ff41]/20 p-16 rounded-[3rem] flex flex-col items-center justify-center">
         <h2 className="text-[#00ff41] text-xs font-bold uppercase tracking-[0.5em] mb-4 text-center">Net Operating Profit</h2>
-        <p className="text-
+        <p className="text-7xl md:text-8xl font-black text-[#00ff41] tracking-tighter drop-shadow-2xl">£488.74</p>
+      </div>
+    </div>
+  );
+}
