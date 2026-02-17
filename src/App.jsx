@@ -20,11 +20,11 @@ export default function App() {
         const values = rows[1]; // Adjust index based on which row your totals are in
 
         setData({
-          sales: values[4],   // Assuming Column A is Sales
-          cost: values[4],    // Assuming Column B is Cost
-          gp: values[4],      // Assuming Column C is GP%
-          labour: values[4],  // Assuming Column D is Labour
-          profit: values[4]   // Assuming Column E is Profit
+          sales: values[9],   // Assuming Column A is Sales
+          cost: values[10],    // Assuming Column B is Cost
+          gp: values[11],      // Assuming Column C is GP%
+          labour: values[12],  // Assuming Column D is Labour
+          profit: values[13]   // Assuming Column E is Profit
         });
       } catch (error) {
         console.error("Error fetching sheet data:", error);
