@@ -105,4 +105,63 @@ export default function App() {
             <StatCard label="Labour Cost" value={`£${data.labour.toLocaleString(undefined, {minimumFractionDigits: 2})}`} color="text-purple-400" icon={Users} />
           </div>
 
-          <div
+          <div className="bg-[#00ff41]/5 border border-[#00ff41]/20 p-20 rounded-[3rem] text-center shadow-[0_0_100px_-30px_rgba(0,255,65,0.3)] relative overflow-hidden">
+            <div className="relative z-10">
+              <h2 className="text-[#00ff41] text-xs font-bold uppercase tracking-[0.6em] mb-6 opacity-80">Total Net Operating Profit</h2>
+              <p className="text-8xl md:text-9xl font-black text-[#00ff41] tracking-tighter drop-shadow-[0_0_35px_rgba(0,255,65,0.5)]">
+                £{data.profit.toLocaleString(undefined, {minimumFractionDigits: 2})}
+              </p>
+              <div className="mt-8 flex items-center justify-center gap-3">
+                <div className="h-2 w-2 rounded-full bg-[#00ff41] animate-pulse"></div>
+                <span className="text-zinc-500 text-[10px] uppercase font-bold tracking-[0.3em]">Encrypted Data Stream Active</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="max-w-md mx-auto py-10">
+          <div className="text-center mb-12">
+            <h1 className="text-3xl font-black text-[#00ff41] italic tracking-widest uppercase">Terminal_POS_v1.7</h1>
+            <p className="text-zinc-500 text-[10px] mt-2 tracking-widest font-bold">AUTHENTICATED_STAFF_ONLY</p>
+          </div>
+          
+          <div className="grid grid-cols-1 gap-5">
+            <POSButton name="Margarita" onClick={() => handleSale('Margarita')} />
+            <POSButton name="Negroni" onClick={() => handleSale('Negroni')} />
+            <POSButton name="Waste / Tasters" onClick={() => handleSale('WASTE / TASTERS')} />
+          </div>
+
+          <div className="mt-16 p-6 border border-zinc-800 rounded-2xl bg-zinc-900/30">
+            <h3 className="text-[10px] text-zinc-500 uppercase font-bold mb-4 tracking-widest">System Instructions</h3>
+            <ul className="text-[10px] text-zinc-600 space-y-2 uppercase leading-relaxed font-bold">
+              <li>• Tap drink to increment BUSINESS.xlsx</li>
+              <li>• Update is optimistic (Instant locally)</li>
+              <li>• Final values sync on Dashboard refresh</li>
+            </ul>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function StatCard({ label, value, color, icon: Icon }) {
+  return (
+    <div className="bg-zinc-900/40 border border-zinc-800 p-8 rounded-3xl backdrop-blur-md">
+      <Icon className={`${color} mb-6`} size={24} />
+      <p className="text-zinc-500 text-[10px] uppercase font-bold tracking-widest mb-2">{label}</p>
+      <p className={`text-3xl font-black tracking-tighter ${color}`}>{value}</p>
+    </div>
+  );
+}
+
+function POSButton({ name, onClick }) {
+  return (
+    <button 
+      onClick={onClick} 
+      className="w-full py-10 border-2 border-[#00ff41] text-[#00ff41] text-2xl font-black rounded-3xl active:bg-[#00ff41] active:text-black transition-none uppercase shadow-[0_0_25px_-10px_rgba(0,255,65,0.4)]"
+    >
+      {name}
+    </button>
+  );
+}
