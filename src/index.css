@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+  --color-matrix-green: #00ff41;
+  --color-matrix-dark: #0d0d0d;
+}
+
 body {
-  @apply bg-black text-white antialiased font-mono;
+  background-color: black;
+  color: white;
+  font-family: monospace;
 }
